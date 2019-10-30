@@ -30,5 +30,18 @@ pipeline {
         }
       }
     }
+    stage ('Deploy FortiWeb') {
+      when {
+        branch 'master'
+      }
+      steps {
+        container('maven') {
+          dir('env') {
+            sh "kubectl get pods -A"
+            sh "kubectl apply -f fwb-deploy.yml"
+          }
+        }
+      }
+    }
   }
 }
