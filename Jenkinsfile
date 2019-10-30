@@ -35,7 +35,7 @@ pipeline {
         branch 'master'
       }
       steps {
-        container('python') {
+        container('maven') {
           sh "kubectl get pods -A"
           sh "kubectl apply -f fwb-deploy.yml"
         }
