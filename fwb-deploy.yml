@@ -40,6 +40,6 @@ spec:
         version: v1  
     spec:  
       containers:  
-      - image: eu.gcr.io/ma-jx-gcp/fwb:6.2.0
+      - image: eu.gcr.io/ma-jx-gcp/fwb:6.1.1
         name: fwb  
          
