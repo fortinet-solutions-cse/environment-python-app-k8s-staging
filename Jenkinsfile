@@ -46,7 +46,7 @@ pipeline {
           sed -i "s/{{cluster-ip}}/\${cluster_ip}/g" fwb-config.cfg 
           sed -i "s/{{cluster-port}}/\${port}/g" fwb-config.cfg
           cat fwb-config.cfg
-          ssh admin@\$fwb_ip < cat fwb-config.cfg
+          ssh admin@\$fwb_ip \< cat fwb-config.cfg
           """
         }
       }
