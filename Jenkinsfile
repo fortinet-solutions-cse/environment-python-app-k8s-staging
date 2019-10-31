@@ -38,9 +38,14 @@ pipeline {
         container('maven') {
           sh "kubectl get pods -A"
           sh "kubectl apply -f fwb-deploy.yml"
-          sh "cluster_ip=\$(kubectl get svc  -n jx-staging  -o=jsonpath='{.items[0].spec.clusterIP}')"
-          sh "port=\$(kubectl get svc  -n jx-staging  -o=jsonpath='{.items[0].spec.ports[0].port}')"
-          sh "echo \$cluster_ip \$port"
+          sh """
+          cluster_ip=\$(kubectl get svc  -n jx-staging  -o=jsonpath='{.items[0].spec.clusterIP}')
+          port=\$(kubectl get svc  -n jx-staging  -o=jsonpath='{.items[0].spec.ports[0].port}')
+          echo \$cluster_ip \$port
+          sed -i 's/{{cluster-ip}}/\$cluster_ip/g' fwb-config.cfg 
+          sed -i 's/{{cluster-port}}/\$port/g' fwb-config.cfg
+          cat fwb-config
+          """
         }
       }
     }
