@@ -43,8 +43,8 @@ pipeline {
           port=\$(kubectl get svc  -n jx-staging  -o=jsonpath='{.items[0].spec.ports[0].port}')
           fwb_ip=\$(kubectl get pods -l "app=fwb" -o=jsonpath={.items[0].status.podIP})
           echo \$cluster_ip \$port \$fwb_ip
-          sed -i 's/{{cluster_ip}}/\$cluster_ip/g' fwb-config.cfg 
-          sed -i 's/{{port}}/\$port/g' fwb-config.cfg
+          sed -i 's/{{cluster-ip}}/\${cluster_ip}/g' fwb-config.cfg 
+          sed -i 's/{{cluster-port}}/\${port}/g' fwb-config.cfg
           cat fwb-config.cfg
           ssh admin@\$fwb_ip < cat fwb-config.cfg
           """
