@@ -9,4 +9,4 @@ dependencies:
   version: 2.3.112
 - name: python-app-k8s
   repository: http://jenkins-x-chartmuseum:8080
-  version: 0.0.28
+  version: 0.0.29
